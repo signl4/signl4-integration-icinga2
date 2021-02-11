@@ -22,7 +22,10 @@ for ((i = 3; i <= $#-2; i=$i+2 )); do
   then
 	SIGNL4_MSG+=", \"X-S4-Status\": \"resolved\""
   fi
-  
+
+  # Source System
+  SIGNL4_MSG+=", \"X-S4-SourceSystem\": \"Icinga\""
+
   if (($i < $#))
   then
 	SIGNL4_MSG+=", "
