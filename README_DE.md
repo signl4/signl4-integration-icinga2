@@ -46,7 +46,7 @@ Im Folgenden beschreiben wir die nötigen Schritte, um die SIGNL4 mit Icinga2 zu
 
 Auf der Kommandozeile fügen wir als erstes das SIGNL4-Sende-Skript hinzu. Dazu wird dieses heruntergeladen und in das entsprechende Verzeichnis verschoben:
 
-wget https://raw.githubusercontent.com/signl4/sign4-integration-icinga2/master/signl4-notification.sh
+wget https://raw.githubusercontent.com/signl4/signl4-integration-icinga2/master/signl4-notification.sh
 chmod +x signl4-notification.sh
 mv signl4-notification.sh /etc/icinga2/scripts/
 
@@ -54,7 +54,7 @@ mv signl4-notification.sh /etc/icinga2/scripts/
 
 Nun fügen wir die Konfigurations-Datei hinzu und passen diese entsprechend an.
 
-wget https://raw.githubusercontent.com/signl4/sign4-integration-icinga2/master/signl4-icinga2.conf
+wget https://raw.githubusercontent.com/signl4/signl4-integration-icinga2/master/signl4-icinga2.conf
 mv signl4-icinga2.conf /etc/icinga2/conf.d/
 Diese Datei stellt die Alarmierungs-Logik bereit und legt den Nutzer “signl4” an. In diesem Nutzer müssen Sie noch Ihre SIGNL4-Team-Geheimnis im Feld “pager” eintragen. Das ist der letzte Teil Ihre Webhook-URL oder der erste Teil Ihrer SIGNL4-E-Mail-Adresse. Dazu müssen Sie die folgende Zeile entsprechend anpassen.
 
@@ -79,7 +79,7 @@ vars.enable_signl4 = true
 ```
 
 ```
-template Host "generic-service" {
+template Service "generic-service" {
 vars.enable_signl4 = true
 } 
 ```

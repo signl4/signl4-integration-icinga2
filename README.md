@@ -80,7 +80,7 @@ vars.enable_signl4 = true
 ```
 
 ```
-template Host "generic-service" {
+template Service "generic-service" {
 vars.enable_signl4 = true
 }
 ```
