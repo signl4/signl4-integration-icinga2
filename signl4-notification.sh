@@ -12,9 +12,13 @@ for ((i = 3; i <= $#-2; i=$i+2 )); do
   SIGNL4_MSG+="\"${!j}\""
 
   # External Id
-  if [[ "${!i}" == "ServiceStateId" ]]
+  if [[ "${!i}" == "ExternalIdHost" ]]
   then
-	SIGNL4_MSG+=", \"X-S4-ExternalId\": \"Icinga2: ${!j}\""
+	SIGNL4_MSG+=", \"X-S4-ExternalId\": \"Icinga Host: ${!j}\""
+  fi
+  if [[ "${!i}" == "ExternalIdService" ]]
+  then
+	SIGNL4_MSG+=", \"X-S4-ExternalId\": \"Icinga Service: ${!j}\""
   fi
 
   # Check for resolved state
