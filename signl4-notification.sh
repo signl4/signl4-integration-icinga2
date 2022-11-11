@@ -42,7 +42,7 @@ for ((i = 3; i <= $#-2; i=$i+2 )); do
   # Source System
   SIGNL4_MSG+=", \"X-S4-SourceSystem\": \"Icinga\""
 
-  if (($i < $#))
+  if (($i < $# - 3))
   then
 	SIGNL4_MSG+=", "
   fi
