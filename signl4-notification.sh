@@ -6,7 +6,7 @@
 SIGNL4_URL=$2
 
 SIGNL4_MSG="{"
-for ((i = 3; i <= $#-2; i=$i+2 )); do
+for ((i = 3; i <= $#; i=$i+2 )); do
   SIGNL4_MSG+="\"${!i}\": "
   ((j=i+1))
   SIGNL4_MSG+="\"${!j}\""
@@ -39,19 +39,15 @@ for ((i = 3; i <= $#-2; i=$i+2 )); do
 	SIGNL4_MSG+=", \"X-S4-Status\": \"new\""
   fi
 
-  # Source System
-  SIGNL4_MSG+=", \"X-S4-SourceSystem\": \"Icinga\""
-
-  if (($i < $# - 3))
-  then
-	SIGNL4_MSG+=", "
-  fi
 done
+
+# Source System
+SIGNL4_MSG+=", \"X-S4-SourceSystem\": \"Icinga\""
 SIGNL4_MSG="$SIGNL4_MSG }\""
 
 #SIGNL4_MSG="{ \"$1\": \"$2\" }"
 
-#SIGNL4_MSG="{ \"Title\": \"Service $1 notification\", \"Host\": \"$2\", \"IP\": \"$3\", \"Service\": \"$4\", \"State\": \"$5\", \"Additional Info\":\"$6\", \"Nagios notification\": \"$7\", \"X-S4-Service\": \"Nagios\"  }"
+#SIGNL4_MSG="{ \"Title\": \"Service $1 notification\", \"Host\": \"$2\", \"IP\": \"$3\", \"Service\": \"$4\", \"State\": \"$5\", \"Additional Info\":\"$6\", \"Icinga notification\": \"$7\", \"X-S4-Service\": \"Nagios\"  }"
 
 #Send message to SIGNL4
 curl -L -X POST -H "Content-type: application/json" --data "$SIGNL4_MSG" $SIGNL4_URL
