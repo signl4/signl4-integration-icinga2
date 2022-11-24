@@ -9,41 +9,41 @@ SIGNL4_MSG="{"
 for ((i = 3; i <= $#; i=$i+2 )); do
   SIGNL4_MSG+="\"${!i}\": "
   ((j=i+1))
-  SIGNL4_MSG+="\"${!j}\""
+  SIGNL4_MSG+="\"${!j}\", "
 
   # External Id
   if [[ "${!i}" == "ExternalIdHost" ]]
   then
-	SIGNL4_MSG+=", \"X-S4-ExternalId\": \"Icinga Host: ${!j}\""
+	SIGNL4_MSG+="\"X-S4-ExternalId\": \"Icinga Host: ${!j}\", "
   fi
   if [[ "${!i}" == "ExternalIdService" ]]
   then
-	SIGNL4_MSG+=", \"X-S4-ExternalId\": \"Icinga Service: ${!j}\""
+	SIGNL4_MSG+="\"X-S4-ExternalId\": \"Icinga Service: ${!j}\", "
   fi
 
   # Check for resolved state
   shopt -s nocasematch; if [[ "${!i}" == "Type" && "${!j}" == "Recovery" ]]
   then
-	SIGNL4_MSG+=", \"X-S4-Status\": \"resolved\""
+	SIGNL4_MSG+="\"X-S4-Status\": \"resolved\", "
   fi
 
   # Check for acknowledged state
   shopt -s nocasematch; if [[ "${!i}" == "Type" && "${!j}" == "Acknowledgement" ]]
   then
-	SIGNL4_MSG+=", \"X-S4-Status\": \"acknowledged\""
+	SIGNL4_MSG+="\"X-S4-Status\": \"acknowledged\", "
   fi
 
   # Check for problem state
   shopt -s nocasematch; if [[ "${!i}" == "Type" && "${!j}" == "Problem" ]]
   then
-	SIGNL4_MSG+=", \"X-S4-Status\": \"new\""
+	SIGNL4_MSG+="\"X-S4-Status\": \"new\", "
   fi
 
 done
 
 # Source System
-SIGNL4_MSG+=", \"X-S4-SourceSystem\": \"Icinga\""
-SIGNL4_MSG="$SIGNL4_MSG }\""
+SIGNL4_MSG+="\"X-S4-SourceSystem\": \"Icinga\""
+SIGNL4_MSG+="}"
 
 #SIGNL4_MSG="{ \"$1\": \"$2\" }"
 
